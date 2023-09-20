@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Persean Commercial Realty Group</title>
+        <style>
+            :root {
+                --type-arid: 234, 199, 170;
+                --type-barren: 216, 225, 235;
+                --type-barren2: 216, 225, 235;
+                --type-barren3: 216, 225, 235;
+                --type-barren_castiron: 216, 225, 235;
+                --type-barren_venuslike: 234, 223, 141;
+                --type-barren-bombarded: 226, 228, 235;
+                --type-barren-desert: 234, 170, 142;
+                --type-black_hole: 234, 141, 234;
+                --type-star_blue_giant: 107, 161, 216;
+                --type-star_blue_supergiant: 107, 161, 216;
+                --type-star_browndwarf: 229, 71, 18;
+                --type-cryovolcanic: 131, 148, 216;
+                --type-desert: 234, 199, 170;
+                --type-desert1: 234, 199, 170;
+                --type-frozen: 191, 191, 216;
+                --type-frozen1: 191, 191, 216;
+                --type-frozen2: 191, 191, 216;
+                --type-frozen3: 191, 191, 216;
+                --type-gas_giant: 235, 192, 106;
+                --type-ice_giant: 134, 190, 235;
+                --type-irradiated: 190, 152, 229;
+                --type-jungle: 169, 216, 186;
+                --type-rocky_ice: 235, 235, 235;
+                --type-rocky_metallic: 234, 234, 176;
+                --type-rocky_unstable: 235, 194, 138;
+                --type-star_neutron: 143, 161, 216;
+                --type-star_orange: 216, 114, 33;
+                --type-star_orange_giant: 216, 114, 33;
+                --type-star_red_dwarf: 216, 0, 0;
+                --type-star_red_giant: 216, 0, 0;
+                --type-star_red_supergiant: 216, 0, 0;
+                --type-star_white: 216, 216, 216;
+                --type-star_yellow: 216, 216, 0;
+                --type-terran: 131, 156, 216;
+                --type-terran-eccentric: 149, 181, 235;
+                --type-toxic: 216, 199, 101;
+                --type-toxic_cold: 216, 199, 101;
+                --type-tundra: 152, 223, 234;
+                --type-lava: 235, 125, 60;
+                --type-lava_minor: 235, 125, 60;
+                --type-water: 60, 132, 235;
+            }
+            @font-face {
+                font-family: "Montserrat";
+                src: url('fonts/Montserrat-Medium.ttf');
+            }
+            @font-face {
+                font-family: "Montserrat";
+                font-weight: bold;
+                src: url('fonts/Montserrat-Bold.ttf');
+            }
+            @font-face {
+                font-family: "Montserrat";
+                font-style: italic;
+                src: url('fonts/Montserrat-MediumItalic.ttf');
+            }
+            @font-face {
+                font-family: "Orbitron";
+                src: url('fonts/Orbitron-Medium.ttf');
+            }
+            @font-face {
+                font-family: "Orbitron";
+                font-weight: bold;
+                src: url('fonts/Orbitron-SemiBold.ttf');
+            }
+            html {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Montserrat, Helvetica, Arial, sans-serif;
+                background: #002632;
+                color: #dcdcdc;
+                line-height: 1.4;
+            }
+            a {
+                color: #ffd200;
+            }
+            .salt {
+                font-feature-settings: "salt";
+                pointer-events: none;
+            }
+            body > header {
+                margin-bottom: 32px;
+                color: #aadeff;
+            }
+            div.main {
+                padding-top: 16px;
+                padding-bottom: 32px;
+                background: #00141a;
+            }
+            body > footer {
+                margin-top: 32px;
+                margin-bottom: 32px;
+                color: #aadeff;
+            }
+            h1, h2, h3 {
+                margin-top: 2em;
+                font-family: Orbitron;
+                color: #aadeff;
+            }
+            body > header h1 {
+                margin-top: 32px;
+                margin-bottom: 0;
+            }
+            div.constrain {
+                max-width: 816px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            div.file_status {
+                display: flex;
+                gap: 16px;
+                align-items: baseline;
+                overflow: hidden;
+            }
+            input[type="file"] {
+                position: absolute;
+                top: -9999px;
+            }
+            div.constrain:first-child {
+                margin-bottom: 32px;
+            }
+            section[data-colony] {
+                overflow: hidden;
+                max-width: 816px;
+                max-height: 1500px;
+                margin-left: auto;
+                margin-right: auto;
+                border: 1px solid #1f5e70;
+                padding: 29px;
+                background: rgba(0, 0, 0, 0.8);
+                box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
+                transition: opacity 0.2s, max-height 0.2s, margin 0.2s, padding 0.2s;
+            }
+            section[data-colony].rolled_up {
+                opacity: 0;
+                max-height: 0;
+                margin-top: 0;
+                margin-bottom: -34px;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            section[data-colony] + div.constrain {
+                margin-top: 32px;
+            }
+            section[data-colony] header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 16px;
+            }
+            section[data-colony] header ul {
+                list-style-type: none;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-left: 0;
+                display: flex;
+                gap: 16px;
+            }
+            section[data-colony] h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            div#modal {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                grid-template-rows: 1fr auto 1fr;
+                background: rgba(0, 38, 50, 0.75);
+            }
+            div#modal:not([data-open]) {
+                display: none;
+            }
+            div.dialog {
+                grid-row-start: 2;
+                grid-column-start: 2;
+                border: 1px solid #d0d8d8;
+                border-radius: 6px;
+                padding: 32px;
+                background-color: #040e11;
+            }
+            div#modal div.dialog {
+                display: none;
+            }
+            div.dialog p {
+                margin-top: 8px;
+                margin-bottom: 8px;
+                max-width: 30em;
+            }
+            div.dialog h4 {
+                margin-bottom: 8px;
+                color: #aadeff;
+            }
+            div#modal[data-open="searching"] div#searching_dialog,
+            div#modal[data-open="choose_structures"] div#choose_structures_dialog,
+            div#modal[data-open="configure_structure"] div#configure_structure_dialog,
+            div#modal[data-open="save_load_criteria"] div#save_load_criteria_dialog,
+            div#modal[data-open="planet_sets"] div#planet_sets_dialog {
+                display: block;
+            }
+            thead td {
+                border: 1px solid #16424e;
+            }
+            tr:nth-child(2n+1) {
+                background: #061519;
+            }
+            td {
+                padding: 4px;
+            }
+            tbody#bodies td {
+                height: 40px;
+            }
+            tbody td.nowrap {
+                white-space: nowrap;
+            }
+            td.numeric {
+                text-align: right;
+            }
+            img {
+                vertical-align: bottom;
+            }
+            span.arrow {
+                display: inline-block;
+                padding: 0 4px;
+                transform: rotate(var(--angle));
+                color: #9b8102;
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 0;
+                pointer-events: none;
+            }
+            /*
+            svg.arrow {
+                width: 14px;
+                height: 14px;
+                padding: 0 4px;
+                fill: #9b8102;
+            }
+            */
+            svg.filters {
+                position: absolute;
+                height: 0;
+            }
+            section {
+                margin-top: 32px;
+                margin-bottom: 32px;
+            }
+            select {
+                border-color: #2c657d;
+                padding: 2px;
+                font-size: 16px;
+                background: #15404d;
+                color: #aadeff;
+            }
+            select:focus,
+            select option:focus {
+                outline: none;
+                border-color: #4090b0;
+            }
+            ul.structures {
+                list-style: none;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 192px);
+                grid-gap: 16px;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                padding-left: 0;
+                line-height: normal;
+                color: #aadeff;
+            }
+            li.structure[data-improvements="true"] {
+                color: rgba(163, 239, 128, 1);
+            }
+            ul.structures li.industry {
+                background-color: #15404d;
+            }
+            ul.structures li.industry[data-improvements="true"] {
+                background-color: rgba(163, 239, 128, 0.20);
+            }
+            li.structure label {
+                font-size: 13px;
+                display: block;
+                padding: 2px 4px;
+            }
+            li.structure div.images {
+                position: relative;
+                border: 1px solid #15404d;
+                user-select: none;
+                transition: filter 0.2s;
+            }
+            li.structure:hover label {
+                color: #ffffff;
+            }
+            li.structure:hover div.images {
+                filter: brightness(1.3);
+            }
+            li.structure[data-improvements="true"] div.images {
+                border-color: transparent;
+            }
+            li.structure img.illustration {
+                width: 190px;
+                height: 95px;
+            }
+            li.structure.selected {
+                box-shadow: 0 0 4px 4px #ff7f00;
+            }
+            li.structure div.additions {
+                position: absolute;
+                top: 3px;
+                right: 6px;
+                left: 6px;
+                height: 32px;
+                display: flex;
+                justify-content: flex-end;
+            }
+            li.structure[data-artifact] div.additions::before,
+            li.structure[data-aicore] div.additions::after {
+                content: "";
+                background-size: cover;
+                width: 32px;
+                height: 32px;
+                filter: url(#additions-glow);
+            }
+            li.structure[data-artifact="coronal_portal"] div.additions::before {
+                background-image: url(images/cargo/coronal_portal.png);
+            }
+            li.structure[data-artifact="orbital_fusion_lamp"] div.additions::before {
+                background-image: url(images/cargo/orbital_fusion_lamp.png);
+            }
+            li.structure[data-artifact="orbital_fusion_lamp_optional"] div.additions::before {
+                background-image: url(images/cargo/orbital_fusion_lamp.png);
+                content: "?";
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                text-shadow: -1px -1px 0 black, 1px -1px 0 black, 1px 1px 0 black, -1px 1px 0 black;
+            }
+            li.structure[data-artifact="fullerene_spool"] div.additions::before {
+                background-image: url(images/cargo/fullerene_spool.png);
+            }
+            li.structure[data-artifact="soil_nanites"] div.additions::before {
+                background-image: url(images/cargo/soil_nanites.png);
+            }
+            li.structure[data-artifact="mantle_bore"] div.additions::before {
+                background-image: url(images/cargo/mantle_bore.png);
+            }
+            li.structure[data-artifact="plasma_dynamo"] div.additions::before {
+                background-image: url(images/cargo/plasma_dynamo.png);
+            }
+            li.structure[data-artifact="catalytic_core"] div.additions::before {
+                background-image: url(images/cargo/catalytic_core.png);
+            }
+            li.structure[data-artifact="biofactory_embryo"] div.additions::before {
+                background-image: url(images/cargo/biofactory_embryo.png);
+            }
+            li.structure[data-artifact="corrupted_nanoforge"] div.additions::before {
+                background-image: url(images/cargo/corrupted_nanoforge.png);
+            }
+            li.structure[data-artifact="pristine_nanoforge"] div.additions::before {
+                background-image: url(images/cargo/pristine_nanoforge.png);
+            }
+            li.structure[data-artifact="synchrotron"] div.additions::before {
+                background-image: url(images/cargo/synchrotron.png);
+            }
+            li.structure[data-artifact="dealmaker_holosuite"] div.additions::before {
+                background-image: url(images/cargo/dealmaker_holosuite.png);
+            }
+            li.structure[data-artifact="cryoarithmetic_engine"] div.additions::before {
+                background-image: url(images/cargo/cryoarithmetic_engine.png);
+            }
+            li.structure[data-artifact="drone_replicator"] div.additions::before {
+                background-image: url(images/cargo/drone_replicator.png);
+            }
+            li.structure[data-aicore="1"] div.additions::after {
+                background-image: url(images/cargo/ai_core_gamma.png);
+            }
+            li.structure[data-aicore="2"] div.additions::after {
+                background-image: url(images/cargo/ai_core_beta.png);
+            }
+            li.structure[data-aicore="3"] div.additions::after {
+                background-image: url(images/cargo/ai_core_alpha.png);
+            }
+            span.button_like {
+                display: inline-block;
+                line-height: normal;
+            }
+            span.button_like,
+            button {
+                border: 0;
+                border-radius: 8px 0 8px 0;
+                padding: 4px 16px;
+                font-family: Orbitron;
+                font-size: 16px;
+                background: rgba(31, 94, 112, 0.68);
+                color: #aadeff;
+            }
+            span.button_like:hover,
+            button:hover {
+                background: rgba(31, 94, 112, 1);
+            }
+            span.button_like:active,
+            button:active {
+                background: rgba(77, 136, 153, 1);
+            }
+            button.icon {
+                background: transparent;
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            button.top_right {
+                padding-left: 16px;
+            }
+            div.dialog header {
+                font-family: Orbitron;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 16px;
+                color: #aadeff;
+            }
+            div.dialog footer {
+                margin-top: 32px;
+                display: flex;
+                justify-content: space-between;
+            }
+            label.toggle_container {
+                display: inline-block;
+                border: 1px solid #15404d;
+                padding: 1px;
+                font-size: 14px;
+                color: #aadeff;
+                user-select: none;
+            }
+            label.toggle_container.story {
+                border-color: rgba(163, 239, 128, 0.33);
+                color: rgba(163, 239, 128, 1);
+            }
+            label.toggle_container input[type="checkbox"],
+            label.toggle_container input[type="radio"] {
+                display: none;
+            }
+            label.toggle_container div.label {
+                display: inline-block;
+                padding: 2px 8px;
+                text-shadow: 0 0 1px 1px black;
+            }
+            label.toggle_container :checked ~ div.label {
+                background-color: #15404d;
+            }
+            label.toggle_container.story :checked ~ div.label {
+                background-color: rgb(163, 239, 128, 0.33);
+            }
+            div#choose_structures_dialog ul.structures {
+                grid-template-columns: repeat(5, 192px);
+            }
+            /* Artifacts */
+            div#configure_structure_dialog div.artifact {
+                display: none;
+            }
+            div#configure_structure_dialog[data-structure="population"] div.artifact.population,
+            div#configure_structure_dialog[data-structure="spaceport"] div.artifact.spaceport,
+            div#configure_structure_dialog[data-structure="megaport"] div.artifact.megaport,
+            div#configure_structure_dialog[data-structure="farmingaquaculture"] div.artifact.farmingaquaculture,
+            div#configure_structure_dialog[data-structure="mining"] div.artifact.mining,
+            div#configure_structure_dialog[data-structure="refining"] div.artifact.refining,
+            div#configure_structure_dialog[data-structure="lightindustry"] div.artifact.lightindustry,
+            div#configure_structure_dialog[data-structure="heavyindustry"] div.artifact.heavyindustry,
+            div#configure_structure_dialog[data-structure="orbitalworks"] div.artifact.orbitalworks,
+            div#configure_structure_dialog[data-structure="fuelprod"] div.artifact.fuelprod,
+            div#configure_structure_dialog[data-structure="commerce"] div.artifact.commerce,
+            div#configure_structure_dialog[data-structure="patrolhq"] div.artifact.patrolhq,
+            div#configure_structure_dialog[data-structure="militarybase"] div.artifact.militarybase,
+            div#configure_structure_dialog[data-structure="highcommand"] div.artifact.highcommand,
+            div#configure_structure_dialog[data-structure="grounddefenses"] div.artifact.grounddefenses,
+            div#configure_structure_dialog[data-structure="heavybatteries"] div.artifact.heavybatteries {
+                display: block;
+            }
+            div.dialog_mid {
+                border: 1px solid #16424e;
+                padding-top: 2px;
+            }
+            div.table_constraint {
+                height: 75vh;
+                overflow-y: scroll;
+            }
+            .template {
+                display: none;
+            }
+            div.warning {
+                display: none;
+                margin-bottom: 16px;
+                color: #ff6666;
+            }
+            table.planet_sets {
+                margin-top: -4px;
+                border: 0;
+                font-size: 15px;
+                font-variant-numeric: tabular-nums;
+                color: #aadeff;
+            }
+            table.planet_sets tr.overall td {
+                font-weight: bold;
+                padding-bottom: 2em;
+            }
+            table.planet_sets tr.overall td:first-child {
+                text-align: right;
+            }
+            table.planet_sets thead {
+                position: sticky;
+                top: 0;
+                background: #000000;
+                z-index: 2;
+            }
+            table.planet_sets td:is([data-detail],[data-products],[data-demands]) {
+                cursor: default;
+            }
+            table.planet_sets td:is([data-products],[data-demands]) {
+                text-align: center;
+            }
+            /* Tooltip */
+            div#tooltip {
+                opacity: 0;
+                transition: opacity 0.05s cubic-bezier(1, 0, 1, 0);
+                position: absolute;
+                border: 1px solid #3ac7e4;
+                padding: 8px;
+                font-size: 15px;
+                font-variant-numeric: tabular-nums;
+                line-height: normal;
+                white-space: nowrap;
+                background: black;
+                pointer-events: none;
+                z-index: 3;
+            }
+            div#tooltip td.stat {
+                color: #ffd200;
+            }
+            div#tooltip td.stat.negative {
+                color: #ff6400;
+            }
+            div#tooltip ul.conditions {
+                list-style-type: none;
+                display: flex;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-left: 0;
+                gap: 4px;
+            }
+            div#tooltip ul.conditions li {
+                border: 1px solid #666666;
+                border-radius: 4px;
+                padding: 1px;
+            }
+            div#tooltip ul.conditions li img {
+                border-radius: 2px;
+            }
+            td.type-arid { color: rgb(var(--type-arid)); }
+            td.type-barren { color: rgb(var(--type-barren)); }
+            td.type-barren2 { color: rgb(var(--type-barren2)); }
+            td.type-barren3 { color: rgb(var(--type-barren3)); }
+            td.type-barren_castiron { color: rgb(var(--type-barren_castiron)); }
+            td.type-barren_venuslike { color: rgb(var(--type-barren_venuslike)); }
+            td.type-barren-bombarded { color: rgb(var(--type-barren-bombarded)); }
+            td.type-barren-desert { color: rgb(var(--type-barren-desert)); }
+            td.type-black_hole { color: rgb(var(--type-black_hole)); }
+            td.type-star_blue_giant { color: rgb(var(--type-star_blue_giant)); }
+            td.type-star_blue_supergiant { color: rgb(var(--type-star_blue_supergiant)); }
+            td.type-star_browndwarf { color: rgb(var(--type-star_browndwarf)); }
+            td.type-cryovolcanic { color: rgb(var(--type-cryovolcanic)); }
+            td.type-desert { color: rgb(var(--type-desert)); }
+            td.type-desert1 { color: rgb(var(--type-desert1)); }
+            td.type-frozen { color: rgb(var(--type-frozen)); }
+            td.type-frozen1 { color: rgb(var(--type-frozen1)); }
+            td.type-frozen2 { color: rgb(var(--type-frozen2)); }
+            td.type-frozen3 { color: rgb(var(--type-frozen3)); }
+            td.type-gas_giant { color: rgb(var(--type-gas_giant)); }
+            td.type-ice_giant { color: rgb(var(--type-ice_giant)); }
+            td.type-irradiated { color: rgb(var(--type-irradiated)); }
+            td.type-jungle { color: rgb(var(--type-jungle)); }
+            td.type-rocky_ice { color: rgb(var(--type-rocky_ice)); }
+            td.type-rocky_metallic { color: rgb(var(--type-rocky_metallic)); }
+            td.type-rocky_unstable { color: rgb(var(--type-rocky_unstable)); }
+            td.type-star_neutron { color: rgb(var(--type-star_neutron)); }
+            td.type-star_orange { color: rgb(var(--type-star_orange)); }
+            td.type-star_orange_giant { color: rgb(var(--type-star_orange_giant)); }
+            td.type-star_red_dwarf { color: rgb(var(--type-star_red_dwarf)); }
+            td.type-star_red_giant { color: rgb(var(--type-star_red_giant)); }
+            td.type-star_red_supergiant { color: rgb(var(--type-star_red_supergiant)); }
+            td.type-star_white { color: rgb(var(--type-star_white)); }
+            td.type-star_yellow { color: rgb(var(--type-star_yellow)); }
+            td.type-terran { color: rgb(var(--type-terran)); }
+            td.type-terran-eccentric { color: rgb(var(--type-terran-eccentric)); }
+            td.type-toxic { color: rgb(var(--type-toxic)); }
+            td.type-toxic_cold { color: rgb(var(--type-toxic_cold)); }
+            td.type-tundra { color: rgb(var(--type-tundra)); }
+            td.type-lava { color: rgb(var(--type-lava)); }
+            td.type-lava_minor { color: rgb(var(--type-lava_minor)); }
+            td.type-water { color: rgb(var(--type-water)); }
+            div#tooltip ul.conditions.type-arid li { border-color: rgba(var(--type-arid), 0.5); }
+            div#tooltip ul.conditions.type-barren li { border-color: rgba(var(--type-barren), 0.5); }
+            div#tooltip ul.conditions.type-barren2 li { border-color: rgba(var(--type-barren2), 0.5); }
+            div#tooltip ul.conditions.type-barren3 li { border-color: rgba(var(--type-barren3), 0.5); }
+            div#tooltip ul.conditions.type-barren_castiron li { border-color: rgba(var(--type-barren_castiron), 0.5); }
+            div#tooltip ul.conditions.type-barren_venuslike li { border-color: rgba(var(--type-barren_venuslike), 0.5); }
+            div#tooltip ul.conditions.type-barren-bombarded li { border-color: rgba(var(--type-barren-bombarded), 0.5); }
+            div#tooltip ul.conditions.type-barren-desert li { border-color: rgba(var(--type-barren-desert), 0.5); }
+            div#tooltip ul.conditions.type-cryovolcanic li { border-color: rgba(var(--type-cryovolcanic), 0.5); }
+            div#tooltip ul.conditions.type-desert li { border-color: rgba(var(--type-desert), 0.5); }
+            div#tooltip ul.conditions.type-desert1 li { border-color: rgba(var(--type-desert1), 0.5); }
+            div#tooltip ul.conditions.type-frozen li { border-color: rgba(var(--type-frozen), 0.5); }
+            div#tooltip ul.conditions.type-frozen1 li { border-color: rgba(var(--type-frozen1), 0.5); }
+            div#tooltip ul.conditions.type-frozen2 li { border-color: rgba(var(--type-frozen2), 0.5); }
+            div#tooltip ul.conditions.type-frozen3 li { border-color: rgba(var(--type-frozen3), 0.5); }
+            div#tooltip ul.conditions.type-gas_giant li { border-color: rgba(var(--type-gas_giant), 0.5); }
+            div#tooltip ul.conditions.type-ice_giant li { border-color: rgba(var(--type-ice_giant), 0.5); }
+            div#tooltip ul.conditions.type-irradiated li { border-color: rgba(var(--type-irradiated), 0.5); }
+            div#tooltip ul.conditions.type-jungle li { border-color: rgba(var(--type-jungle), 0.5); }
+            div#tooltip ul.conditions.type-rocky_ice li { border-color: rgba(var(--type-rocky_ice), 0.5); }
+            div#tooltip ul.conditions.type-rocky_metallic li { border-color: rgba(var(--type-rocky_metallic), 0.5); }
+            div#tooltip ul.conditions.type-rocky_unstable li { border-color: rgba(var(--type-rocky_unstable), 0.5); }
+            div#tooltip ul.conditions.type-terran li { border-color: rgba(var(--type-terran), 0.5); }
+            div#tooltip ul.conditions.type-terran-eccentric li { border-color: rgba(var(--type-terran-eccentric), 0.5); }
+            div#tooltip ul.conditions.type-toxic li { border-color: rgba(var(--type-toxic), 0.5); }
+            div#tooltip ul.conditions.type-toxic_cold li { border-color: rgba(var(--type-toxic_cold), 0.5); }
+            div#tooltip ul.conditions.type-tundra li { border-color: rgba(var(--type-tundra), 0.5); }
+            div#tooltip ul.conditions.type-lava li { border-color: rgba(var(--type-lava), 0.5); }
+            div#tooltip ul.conditions.type-lava_minor li { border-color: rgba(var(--type-lava_minor), 0.5); }
+            div#tooltip ul.conditions.type-water li { border-color: rgba(var(--type-water), 0.5); }
+			span.type-arid { display:block; color: rgb(var(--type-arid));  width : 150px;}
+			span.type-barren { display:block; color: rgb(var(--type-barren));  width : 150px;}
+			span.type-barren-bombarded { display:block; color: rgb(var(--type-barren-bombarded));  width : 150px;}
+			span.type-barren-desert { display:block; color: rgb(var(--type-barren-desert));  width : 150px;}
+			span.type-cryovolcanic { display:block; color: rgb(var(--type-cryovolcanic));  width : 150px;}
+			span.type-desert { display:block; color: rgb(var(--type-desert));  width : 150px;}
+			span.type-frozen { display:block; color: rgb(var(--type-frozen));  width : 150px;}
+			span.type-gas_giant { display:block; color: rgb(var(--type-gas_giant));  width : 150px;}
+			span.type-ice_giant { display:block; color: rgb(var(--type-ice_giant));  width : 150px;}
+			span.type-irradiated { display:block; color: rgb(var(--type-irradiated));  width : 150px;}
+			span.type-jungle { display:block; color: rgb(var(--type-jungle));  width : 150px;}
+			span.type-rocky_ice { display:block; color: rgb(var(--type-rocky_ice));  width : 150px;}
+			span.type-rocky_metallic { display:block; color: rgb(var(--type-rocky_metallic));  width : 150px;}
+			span.type-rocky_unstable { display:block; color: rgb(var(--type-rocky_unstable));  width : 150px;}
+			span.type-terran { display:block; color: rgb(var(--type-terran));  width : 150px;}
+			span.type-terran-eccentric { display:block; color: rgb(var(--type-terran-eccentric));  width : 150px;}
+			span.type-toxic { display:block; color: rgb(var(--type-toxic));  width : 150px;}
+			span.type-tundra { display:block; color: rgb(var(--type-tundra));  width : 150px;}
+			span.type-volcanic { display:block; color: rgb(var(--type-volcanic));  width : 150px;}
+			span.type-water { display:block; color: rgb(var(--type-water));  width : 150px;}
+
+
+
+            /* Searching */
+            div.spin {
+                text-align: center;
+            }
+            div.spin img {
+                position: relative;
+                animation: 10s spin cubic-bezier(0.4, 0, 0.5, 1) infinite;
+            }
+            @keyframes spin {
+                100% { transform: rotate(3960deg); }
+            }
+            /* Save/Load Preset Dialog */
+            div.save_slots,
+            div.name_input {
+                margin-bottom: 16px;
+            }
+            div.save_slots label.toggle_container {
+                display: block;
+                margin-bottom: 3px;
+            }
+            div.save_slots label.toggle_container div.label {
+                display: block;
+                font-variant-numeric: tabular-nums;
+            }
+            div#save_load_criteria_dialog input[name="preset_name"] {
+                width: 30em;
+                border: 1px solid #1f5e70;
+                padding: 3px;
+                font-size: 16px;
+                background-color: #15404d;
+                color: #aadeff;
+            }
+            div#save_load_criteria_dialog:not([data-mode="save"]) button.save_preset,
+            div#save_load_criteria_dialog:not([data-mode="save"]) div.name_input {
+                display: none;
+            }
+            /* Share */
+            div.add_share {
+                display: flex;
+                justify-content: space-between;
+                overflow: hidden;
+            }
+            span.copied_url {
+                opacity: 0;
+                display: inline-block;
+                margin-right: 16px;
+            }
+            @keyframes fade {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            /* Bug reporting */
+            textarea#parse_error {
+                display: none;
+                width: 100%;
+                height: 10em;
+            }
+            textarea#parse_error.visible {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="constrain">
+                <h1>Persean Commercial Realty Group</h1>
+                <big><i>“Serving starfarers in the Persean Sector since cycle 183!”</i></big>
+            </div>
+        </header>
+        <div class="main">
+        <div class="constrain">
+            <p>At PCRG, our mission is to find ideal sites for your commercial operations. Our in-depth understanding of the Sector’s economy allows us to predict how effective your intended colonies will be on a variety of different planets, giving your business the best possible chance of success!</p>
+            <p>To get started, drop your save file (campaign.xml) onto this page or select it below. Need <a href="#help">help</a>?</p>
+            <div class="file_status">
+                <label>
+                    <span class="button_like">Select Save File</span>
+                    <input type="file">
+                </label>
+                <div class="status"></div>
+            </div>
+            <p><small>Privacy notice: All processing is done locally in your browser. Your save data will not be sent to any other computer.</small></p>
+            <h2>What are you looking for?</h2>
+            <p>Tell us how you plan to run your colony (or colonies), and we’ll prepare a ranked list of planets (or combinations of planets) that suit your needs!</p>
+        </div>
+        <section data-colony="0">
+            <header>
+                <h3>Colony 1</h3>
+                <ul class="manipulators">
+                    <li><button class="save_criteria icon top_right" title="Save Preset"><img src="images/save.svg" width="20" height="20"></button></li>
+                    <li><button class="load_criteria icon top_right" title="Load Preset"><img src="images/load.svg" width="20" height="20"></button></li>
+                    <li><button class="delete_colony icon top_right" title="Delete Colony"><img src="images/delete.svg" width="20" height="20"></button></li>
+                </ul>
+            </header>
+            <!--
+                Up to 3 human admins can each govern one colony.
+            -->
+            <label class="toggle_container">
+                <input type="checkbox" class="player_governed">
+                <div class="label" title="Management bonus/penalty">Player-Governed</div>
+            </label>
+            <label class="toggle_container">
+                <input type="checkbox" class="industrial_planning">
+                <div class="label" title="+1 production">Industrial Planning</div>
+            </label>
+            <label class="toggle_container">
+                <input type="checkbox" class="hypercognition">
+                <div class="label" title="+10% accessibility, +20% fleet size, x1.5 ground defenses, +1 stability">Hypercognition</div>
+            </label>
+            <!-- Size -->
+            <label class="toggle_container">
+                <input type="checkbox" class="free_port">
+                <div class="label" title="+25% accessibility, -3 stability">Free Port</div>
+            </label>
+            <ul class="structures">
+                <li class="structure" data-structure="population">
+                    <label>Population & Infrastructure</label>
+                    <div class="images">
+                        <img class="illustration" draggable="false" src="images/industries/population.png">
+                        <div class="additions"></div>
+                    </div>
+                </li>
+                <li class="structure" data-structure="spaceport" data-group="port">
+                    <label>Spaceport</label>
+                    <div class="images">
+                        <img class="illustration" draggable="false" src="images/industries/spaceport.png">
+                        <div class="additions"></div>
+                    </div>
+                </li>
+            </ul>
+            <button class="choose_structures">Choose Industries and Structures</button>
+            <p>System must contain:</p>
+            <label class="toggle_container">
+                <input type="checkbox" class="domain_relay">
+                <div class="label">Domain Comm Relay</div>
+            </label>
+            <label class="toggle_container">
+                <input type="checkbox" class="gate">
+                <div class="label">Gate</div>
+            </label>
+			
+			<p>Planet types:</p>		
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeArid">
+                <div class="label" align="center"><span class="type-arid">Arid</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeBarren">
+                <div class="label" align="center"><span class="type-barren">Barren</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeBarren-Bombarded">
+                <div class="label" align="center"><span class="type-barren-bombarded">Barren-Bombarded</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeBarren-Desert">
+                <div class="label" align="center"><span class="type-barren-desert">Barren-Desert</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeCryovolcanic">
+                <div class="label" align="center"><span class="type-cryovolcanic">Cryovolcanic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeDesert">
+                <div class="label" align="center"><span class="type-desert">Desert</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeFrozen">
+                <div class="label" align="center"><span class="type-frozen">Frozen</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeGas_Giant">
+                <div class="label" align="center"><span class="type-gas_giant">Gas Giant</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeIce_Giant">
+                <div class="label" align="center"><span class="type-ice_giant">Ice Giant</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeIrradiated">
+                <div class="label" align="center"><span class="type-irradiated">Irradiated</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeJungle">
+                <div class="label" align="center"><span class="type-jungle">Jungle</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeRocky_Ice">
+                <div class="label" align="center"><span class="type-rocky_ice">Rocky Ice</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeRocky_Metallic">
+                <div class="label" align="center"><span class="type-rocky_metallic">Rocky Metallic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeRocky_Unstable">
+                <div class="label" align="center"><span class="type-rocky_unstable">Rocky Unstable</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeTerran">
+                <div class="label" align="center"><span class="type-terran">Terran</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeTerran-Eccentric">
+                <div class="label" align="center"><span class="type-terran-eccentric">Terran Eccentric</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeToxic">
+                <div class="label" align="center"><span class="type-toxic">Toxic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeTundra">
+                <div class="label" align="center"><span class="type-tundra">Tundra</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeVolcanic">
+                <div class="label" align="center"><span class="type-volcanic">Volcanic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeWater">
+                <div class="label" align="center"><span class="type-water">Water</span></div>
+            </label>
+
+			<p>Planet must contain(pick one in each group):</p>
+						<label class="toggle_container">
+			<input type="checkbox" class="ruins_scattered">
+			<div class="label"><img  title="Scattered Ruins" src="images/conditions/ruins_scattered.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ruins_widespread">
+			<div class="label"><img  title="Extensive Ruins" src="images/conditions/ruins_widespread.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ruins_extensive">
+			<div class="label"><img  title="Extensive Ruins" src="images/conditions/ruins_extensive.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ruins_vast">
+			<div class="label"><img  title="Vast Ruins" src="images/conditions/ruins_vast.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_sparse">
+			<div class="label"><img  title="Sparse Ore Deposits" src="images/conditions/ore_sparse.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_moderate">
+			<div class="label"><img  title="Moderate Ore Deposits" src="images/conditions/ore_moderate.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_abundant">
+			<div class="label"><img  title="Abundant Ore Deposits" src="images/conditions/ore_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_rich">
+			<div class="label"><img  title="Rich Ore Deposits" src="images/conditions/ore_rich.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_ultrarich">
+			<div class="label"><img  title="Ultrarich Ore Deposits" src="images/conditions/ore_ultrarich.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_sparse">
+			<div class="label"><img  title="Sparse Rare Ore Deposits" src="images/conditions/rareore_sparse.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_moderate">
+			<div class="label"><img  title="Moderate Rare Ore Deposits" src="images/conditions/rareore_moderate.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_abundant">
+			<div class="label"><img  title="Abundant Rare Ore Deposits" src="images/conditions/rareore_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_rich">
+			<div class="label"><img  title="Rich Rare Ore Deposits" src="images/conditions/rareore_rich.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_ultrarich">
+			<div class="label"><img  title="Ultrarich Rare Ore Deposits" src="images/conditions/rareore_ultrarich.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_trace">
+			<div class="label"><img  title="Trace Volatiles" src="images/conditions/volatiles_trace.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_diffuse">
+			<div class="label"><img  title="Diffuse Volatiles" src="images/conditions/volatiles_diffuse.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_abundant">
+			<div class="label"><img  title="Abundant Volatiles" src="images/conditions/volatiles_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_plentiful">
+			<div class="label"><img  title="Plentiful Volatiles" src="images/conditions/volatiles_plentiful.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_trace">
+			<div class="label"><img  title="Trace Organics" src="images/conditions/organics_trace.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_common">
+			<div class="label"><img  title="Common Organics" src="images/conditions/organics_common.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_abundant">
+			<div class="label"><img  title="Abundant Organics" src="images/conditions/organics_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_plentiful">
+			<div class="label"><img  title="Plentiful Organics" src="images/conditions/organics_plentiful.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_poor">
+			<div class="label"><img  title="Poor Farmland" src="images/conditions/farmland_poor.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_adequate">
+			<div class="label"><img  title="Adequate Farmland" src="images/conditions/farmland_adequate.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_rich">
+			<div class="label"><img  title="Rich Farmland" src="images/conditions/farmland_rich.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_bountiful">
+			<div class="label"><img  title="Bountiful Farmland" src="images/conditions/farmland_bountiful.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="solar_array">
+			<div class="label"><img  title="Orbital Solar Array" src="images/conditions/solar_array.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="habitable">
+			<div class="label"><img  title="Habitable" src="images/conditions/habitable.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="decivilized">
+			<div class="label"><img  title="Decivilized" src="images/conditions/decivilized.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="cold">
+			<div class="label"><img  title="Cold" src="images/conditions/cold.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="very_cold">
+			<div class="label"><img  title="Extreme Cold" src="images/conditions/cold_extreme.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="hot">
+			<div class="label"><img  title="Hot" src="images/conditions/hot.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="very_hot">
+			<div class="label"><img  title="Extreme Heat" src="images/conditions/hot_extreme.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="tectonic_activity">
+			<div class="label"><img  title="Tectonic Activity" src="images/conditions/tectonic.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="extreme_tectonic_activity">
+			<div class="label"><img  title="Extreme Tectonic Activity" src="images/conditions/tectonic_extreme.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="no_atmosphere">
+			<div class="label"><img  title="No Atmosphere" src="images/conditions/atmosphere_none.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="thin_atmosphere">
+			<div class="label"><img  title="Thin Atmosphere" src="images/conditions/atmosphere_thin.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="toxic_atmosphere">
+			<div class="label"><img  title="Toxic Atmosphere" src="images/conditions/atmosphere_toxic.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="dense_atmosphere">
+			<div class="label"><img  title="Dense Atmosphere" src="images/conditions/atmosphere_dense.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="mild_climate">
+			<div class="label"><img  title="Mild Climate" src="images/conditions/climate_mild.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="extreme_weather">
+			<div class="label"><img  title="Extreme Weather" src="images/conditions/weather_extreme.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="low_gravity">
+			<div class="label"><img  title="Low Gravity" src="images/conditions/gravity_low.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="high_gravity">
+			<div class="label"><img  title="High Gravity" src="images/conditions/gravity_high.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="irradiated">
+			<div class="label"><img  title="Irradiated" src="images/conditions/irradiated.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="inimical_biosphere">
+			<div class="label"><img  title="Inimical Biosphere" src="images/conditions/inimical_biosphere.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="water_surface">
+			<div class="label"><img  title="Water-covered Surface" src="images/conditions/water_covered.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="poor_light">
+			<div class="label"><img  title="Poor Light" src="images/conditions/poor_light.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="dark">
+			<div class="label"><img  title="Darkness" src="images/conditions/darkness.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="meteor_impacts">
+			<div class="label"><img  title="Meteor Impacts" src="images/conditions/meteor_impacts.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="pollution">
+			<div class="label"><img  title="Pollution" src="images/conditions/pollution.png" /></div>
+			</label>
+        </section>
+        <section data-colony="1" class="template rolled_up">
+            <header>
+                <h3>Colony 2</h3>
+                <ul class="manipulators">
+                    <li><button class="save_criteria icon top_right" title="Save Preset"><img src="images/save.svg" width="20" height="20"></button></li>
+                    <li><button class="load_criteria icon top_right" title="Load Preset"><img src="images/load.svg" width="20" height="20"></button></li>
+                    <li><button class="delete_colony icon top_right" title="Delete Colony"><img src="images/delete.svg" width="20" height="20"></button></li>
+                </ul>
+            </header>
+            <label class="toggle_container">
+                <input type="checkbox" class="player_governed">
+                <div class="label" title="Management bonus/penalty">Player-Governed</div>
+            </label>
+            <label class="toggle_container">
+                <input type="checkbox" class="industrial_planning">
+                <div class="label" title="+1 production">Industrial Planning</div>
+            </label>
+            <label class="toggle_container">
+                <input type="checkbox" class="hypercognition">
+                <div class="label" title="+10% accessibility, +20% fleet size, x1.5 ground defenses, +1 stability">Hypercognition</div>
+            </label>
+            <!-- Size -->
+            <label class="toggle_container">
+                <input type="checkbox" class="free_port">
+                <div class="label" title="+25% accessibility, -3 stability">Free Port</div>
+            </label>
+            <ul class="structures">
+                <li class="structure" data-structure="population">
+                    <label>Population & Infrastructure</label>
+                    <div class="images">
+                        <img class="illustration" draggable="false" src="images/industries/population.png">
+                        <div class="additions"></div>
+                    </div>
+                </li>
+                <li class="structure" data-structure="spaceport" data-group="port">
+                    <label>Spaceport</label>
+                    <div class="images">
+                        <img class="illustration" draggable="false" src="images/industries/spaceport.png">
+                        <div class="additions"></div>
+                    </div>
+                </li>
+            </ul>
+            <button class="choose_structures">Choose Industries and Structures</button>
+            <p>System must contain:</p>
+            <label class="toggle_container">
+                <input type="checkbox" class="domain_relay">
+                <div class="label">Domain Comm Relay</div>
+            </label>
+            <label class="toggle_container">
+                <input type="checkbox" class="gate">
+                <div class="label">Gate</div>
+            </label>
+			
+			<p>Planet types:</p>		
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeArid">
+                <div class="label" align="center"><span class="type-arid">Arid</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeBarren">
+                <div class="label" align="center"><span class="type-barren">Barren</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeBarren-Bombarded">
+                <div class="label" align="center"><span class="type-barren-bombarded">Barren-Bombarded</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeBarren-Desert">
+                <div class="label" align="center"><span class="type-barren-desert">Barren-Desert</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeCryovolcanic">
+                <div class="label" align="center"><span class="type-cryovolcanic">Cryovolcanic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeDesert">
+                <div class="label" align="center"><span class="type-desert">Desert</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeFrozen">
+                <div class="label" align="center"><span class="type-frozen">Frozen</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeGas_Giant">
+                <div class="label" align="center"><span class="type-gas_giant">Gas Giant</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeIce_Giant">
+                <div class="label" align="center"><span class="type-ice_giant">Ice Giant</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeIrradiated">
+                <div class="label" align="center"><span class="type-irradiated">Irradiated</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeJungle">
+                <div class="label" align="center"><span class="type-jungle">Jungle</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeRocky_Ice">
+                <div class="label" align="center"><span class="type-rocky_ice">Rocky Ice</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeRocky_Metallic">
+                <div class="label" align="center"><span class="type-rocky_metallic">Rocky Metallic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeRocky_Unstable">
+                <div class="label" align="center"><span class="type-rocky_unstable">Rocky Unstable</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeTerran">
+                <div class="label" align="center"><span class="type-terran">Terran</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeTerran-Eccentric">
+                <div class="label" align="center"><span class="type-terran-eccentric">Terran Eccentric</span></div>
+            </label>
+			</br>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeToxic">
+                <div class="label" align="center"><span class="type-toxic">Toxic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeTundra">
+                <div class="label" align="center"><span class="type-tundra">Tundra</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeVolcanic">
+                <div class="label" align="center"><span class="type-volcanic">Volcanic</span></div>
+            </label>
+			<label class="toggle_container">
+                <input type="checkbox" class="planetTypeWater">
+                <div class="label" align="center"><span class="type-water">Water</span></div>
+            </label>
+			
+			<p>Planet must contain(pick one in each group):</p>
+			<label class="toggle_container">
+			<input type="checkbox" class="ruins_scattered">
+			<div class="label"><img  title="Scattered Ruins" src="images/conditions/ruins_scattered.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ruins_widespread">
+			<div class="label"><img  title="Extensive Ruins" src="images/conditions/ruins_widespread.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ruins_extensive">
+			<div class="label"><img  title="Extensive Ruins" src="images/conditions/ruins_extensive.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ruins_vast">
+			<div class="label"><img  title="Vast Ruins" src="images/conditions/ruins_vast.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_sparse">
+			<div class="label"><img  title="Sparse Ore Deposits" src="images/conditions/ore_sparse.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_moderate">
+			<div class="label"><img  title="Moderate Ore Deposits" src="images/conditions/ore_moderate.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_abundant">
+			<div class="label"><img  title="Abundant Ore Deposits" src="images/conditions/ore_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_rich">
+			<div class="label"><img  title="Rich Ore Deposits" src="images/conditions/ore_rich.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="ore_ultrarich">
+			<div class="label"><img  title="Ultrarich Ore Deposits" src="images/conditions/ore_ultrarich.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_sparse">
+			<div class="label"><img  title="Sparse Rare Ore Deposits" src="images/conditions/rareore_sparse.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_moderate">
+			<div class="label"><img  title="Moderate Rare Ore Deposits" src="images/conditions/rareore_moderate.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_abundant">
+			<div class="label"><img  title="Abundant Rare Ore Deposits" src="images/conditions/rareore_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_rich">
+			<div class="label"><img  title="Rich Rare Ore Deposits" src="images/conditions/rareore_rich.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="rare_ore_ultrarich">
+			<div class="label"><img  title="Ultrarich Rare Ore Deposits" src="images/conditions/rareore_ultrarich.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_trace">
+			<div class="label"><img  title="Trace Volatiles" src="images/conditions/volatiles_trace.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_diffuse">
+			<div class="label"><img  title="Diffuse Volatiles" src="images/conditions/volatiles_diffuse.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_abundant">
+			<div class="label"><img  title="Abundant Volatiles" src="images/conditions/volatiles_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="volatiles_plentiful">
+			<div class="label"><img  title="Plentiful Volatiles" src="images/conditions/volatiles_plentiful.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_trace">
+			<div class="label"><img  title="Trace Organics" src="images/conditions/organics_trace.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_common">
+			<div class="label"><img  title="Common Organics" src="images/conditions/organics_common.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_abundant">
+			<div class="label"><img  title="Abundant Organics" src="images/conditions/organics_abundant.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="organics_plentiful">
+			<div class="label"><img  title="Plentiful Organics" src="images/conditions/organics_plentiful.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_poor">
+			<div class="label"><img  title="Poor Farmland" src="images/conditions/farmland_poor.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_adequate">
+			<div class="label"><img  title="Adequate Farmland" src="images/conditions/farmland_adequate.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_rich">
+			<div class="label"><img  title="Rich Farmland" src="images/conditions/farmland_rich.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="farmland_bountiful">
+			<div class="label"><img  title="Bountiful Farmland" src="images/conditions/farmland_bountiful.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="solar_array">
+			<div class="label"><img  title="Orbital Solar Array" src="images/conditions/solar_array.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="habitable">
+			<div class="label"><img  title="Habitable" src="images/conditions/habitable.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="decivilized">
+			<div class="label"><img  title="Decivilized" src="images/conditions/decivilized.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="cold">
+			<div class="label"><img  title="Cold" src="images/conditions/cold.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="very_cold">
+			<div class="label"><img  title="Extreme Cold" src="images/conditions/cold_extreme.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="hot">
+			<div class="label"><img  title="Hot" src="images/conditions/hot.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="very_hot">
+			<div class="label"><img  title="Extreme Heat" src="images/conditions/hot_extreme.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="tectonic_activity">
+			<div class="label"><img  title="Tectonic Activity" src="images/conditions/tectonic.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="extreme_tectonic_activity">
+			<div class="label"><img  title="Extreme Tectonic Activity" src="images/conditions/tectonic_extreme.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="no_atmosphere">
+			<div class="label"><img  title="No Atmosphere" src="images/conditions/atmosphere_none.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="thin_atmosphere">
+			<div class="label"><img  title="Thin Atmosphere" src="images/conditions/atmosphere_thin.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="toxic_atmosphere">
+			<div class="label"><img  title="Toxic Atmosphere" src="images/conditions/atmosphere_toxic.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="dense_atmosphere">
+			<div class="label"><img  title="Dense Atmosphere" src="images/conditions/atmosphere_dense.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="mild_climate">
+			<div class="label"><img  title="Mild Climate" src="images/conditions/climate_mild.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="extreme_weather">
+			<div class="label"><img  title="Extreme Weather" src="images/conditions/weather_extreme.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="low_gravity">
+			<div class="label"><img  title="Low Gravity" src="images/conditions/gravity_low.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="high_gravity">
+			<div class="label"><img  title="High Gravity" src="images/conditions/gravity_high.png" /></div>
+			</label>
+			</br>
+			<label class="toggle_container">
+			<input type="checkbox" class="irradiated">
+			<div class="label"><img  title="Irradiated" src="images/conditions/irradiated.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="inimical_biosphere">
+			<div class="label"><img  title="Inimical Biosphere" src="images/conditions/inimical_biosphere.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="water_surface">
+			<div class="label"><img  title="Water-covered Surface" src="images/conditions/water_covered.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="poor_light">
+			<div class="label"><img  title="Poor Light" src="images/conditions/poor_light.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="dark">
+			<div class="label"><img  title="Darkness" src="images/conditions/darkness.png" /></div>
+			</label>
+			&nbsp
+			<label class="toggle_container">
+			<input type="checkbox" class="meteor_impacts">
+			<div class="label"><img  title="Meteor Impacts" src="images/conditions/meteor_impacts.png" /></div>
+			</label>
+			<label class="toggle_container">
+			<input type="checkbox" class="pollution">
+			<div class="label"><img  title="Pollution" src="images/conditions/pollution.png" /></div>
+			</label>
+        </section>
+        <div class="constrain">
+            <div class="add_share">
+                <button class="add_colony icon" title="Add a Colony"><img src="images/add.svg" width="20" height="20"> Add a Colony</button>
+                <div>
+                    <span class="copied_url">Copied URL to clipboard.</span>
+                    <button class="link_colonies icon"><img src="images/sharecolonies.svg" width="20" height="20"></button>
+                </div>
+            </div>
+        </div>
+        <div class="constrain">
+            <h2>Search Parameters</h2>
+            <p>
+                <label>
+                    Colonies must all be
+                    <select name="max_distance">
+                        <option value="0">in the same system.</option>
+                        <option value="5">within 5 ly of each other.</option>
+                        <option value="10">within 10 ly of each other.</option>
+						<option value="15">within 15 ly of each other.</option>
+						<option value="20">within 20 ly of each other.</option>
+						<option value="25">within 25 ly of each other.</option>
+						<option value="30">within 30 ly of each other.</option>
+						<option value="40">within 40 ly of each other.</option>
+						<option value="50">within 50 ly of each other.</option>
+						<option value="100">within 100 ly of each other.</option>
+						<option value="500">within 500 ly of each other.</option>
+                    </select>
+                </label>
+            </p>
+			<p>
+                <label>
+                    Max distance to Core World
+                    <select name="max_distance_tocore">                       
+                        <option value="10">within 10 ly.</option>
+						<option value="15">within 15 ly.</option>
+						<option value="20">within 20 ly.</option>
+						<option value="25">within 25 ly.</option>
+						<option value="30">within 30 ly.</option>
+						<option value="40">within 40 ly.</option>
+						<option value="50">within 50 ly.</option>
+						<option value="100">within 100 ly.</option>
+						<option value="200">within 200 ly.</option>
+                    </select>
+                </label>
+            </p>		
+            <p>
+                <label>
+                    Spoiler policy:
+                    <select name="spoiler_level">
+                        <option value="0">Only show surveyed planets in search results.</option>
+                        <!--<option value="1">Only show surveyed planets, but rate them in comparison with unsurveyed planets.</option>-->
+                        <option value="2">Show all planets in search results.</option>
+                    </select>
+                </label>
+            </p>
+            <div>
+                <button class="search_planets">Search</button>
+            </div>
+            <h2 id="help">Help</h2>
+            <h3>What is this?</h3>
+            <p>PCRG is a tool that <a href="https://fractalsoftworks.com/">Starsector</a> players can use to find good planets to colonize. It reads your save file, simulates your desired (size-6) colonies on as many combinations of planets as possible, and shows you which combinations are the most profitable.</p>
+            <p>It's been tested with vanilla Starsector 0.95.1a-RC6.</p>
+            <h3>Where is my save file?</h3>
+            <ol>
+                <li>Open the folder where Starsector is installed on your computer.
+                    <ul>
+                        <li>Windows: Right-click the icon you normally use to launch Starsector and choose <strong>Open file location</strong>.</li>
+                        <li>macOS: Control-click the <strong>Starsector</strong> icon in your <strong>Applications</strong> folder and choose <strong>Show Package Contents</strong>.</li>
+                        <li>Linux: Navigate to the folder that you extracted from the Starsector zip file.</li>
+                    </ul></li>
+                <li>Open the <strong>saves</strong> folder.</li>
+                <li>Each <strong>save_</strong> folder corresponds to a save slot. They're numbered randomly, so it might be easier to find the one you want if you sort by <strong>Date modified</strong>. Open the one you want.</li>
+                <li>Drag the <strong>campaign.xml</strong> file onto this page.</li>
+            </ol>
+            <h3>What does "parsing failed" mean?</h3>
+            <p>This error message means PCRG wasn’t able to find the information it was looking for in your save file. The most likely reason for this is that you’re using a Starsector mod or version that has not been tested with PCRG.</p>
+            <p>Please report parsing errors to <a href="https://www.reddit.com/r/starsector/comments/ueniqp/not_sure_how_or_where_to_build_your_colonies_i/">this reddit thread</a> or <a href="https://fractalsoftworks.com/forum/index.php?topic=24528.0">this forum thread</a>. Include the contents of the box below this paragraph. (A box will appear here if parsing fails.)</p>
+            <textarea id="parse_error"></textarea>
+            <h3>What if I already have colonies?</h3>
+            <p>Colonies belonging to the player are treated as if they don't exist. If you have colonies, you can use this tool to see what would've happened if you'd built your colonies elsewhere; you can then compare these results to the actual colonies you have in your game.</p>
+            <p>If you've named your colonies, your custom planet names will be shown in the search results, but the planets will be treated the same as empty planets.</p>
+            <h3>Why did my search exceed the time limit?</h3>
+            <p>If there are too many combinations of planets that match your search criteria, the search will terminate after 120 seconds to avoid causing your browser to complain that the page has become unresponsive. If your search terminates this way, you'll see partial results and a warning that not all possibilities were considered.</p>
+            <p>To avoid this, try:</p>
+            <ul>
+                <li>adding structures or artifacts that require a certain kind of planet;</li>
+                <li>adding other requirements, such as <strong>Domain Comm Relay</strong> or <strong>Gate</strong>;</li>
+                <li>requiring your colonies to be closer together or in the same system; or</li>
+                <li>searching for a smaller number of colonies.</li>
+            </ul>
+            <h2>Changelog</h2>
+            <h3>2022-05-09</h3>
+            <ul>
+                <li>Added error message that displays when parsing fails.</li>
+                <li>Improved usability on screens with low vertical resolution.</li>
+            </ul>
+            <h3>2022-04-28</h3>
+            <ul>
+                <li>Initial release.</li>
+            </ul>
+        </div>
+        </div>
+        <footer>
+            <div class="constrain">
+                <p>This website is not affiliated with Fractal Softworks, LLC. Resources from Starsector are used with permission.</p>
+                <p>Font licenses: <a href="fonts/Montserrat-OFL.txt">Montserrat</a>, <a href="fonts/Orbitron-OFL.txt">Orbitron</a></p>
+            </div>
+        </footer>
+        <div id="modal">
+            <div class="dialog" id="searching_dialog">
+                <header>
+                    Searching...
+                </header>
+                <div class="spin"><img src="images/drone_tender.png"></div>
+            </div>
+            <div class="dialog" id="choose_structures_dialog">
+                <header>
+                    Choose Industries and Structures
+                </header>
+                <ul class="structures">
+                    <li class="structure" data-structure="spaceport" data-group="port">
+                        <label>Spaceport</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/spaceport.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="megaport" data-group="port">
+                        <label>Megaport</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/megaport.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="waystation">
+                        <label>Waystation</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/waystation.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="farmingaquaculture">
+                        <label>Farming/Aquaculture</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/farmingaquaculture.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="mining">
+                        <label>Mining</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/mining.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="techmining">
+                        <label>Tech-Mining</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/techmining.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="refining">
+                        <label>Refining</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/refining.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="lightindustry">
+                        <label>Light Industry</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/light_industry.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="heavyindustry" data-group="heavy">
+                        <label>Heavy Industry</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/heavy_industry.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="orbitalworks" data-group="heavy">
+                        <label>Orbital Works</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/orbital_works.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="fuelprod">
+                        <label>Fuel Production</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/fuel_production.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="commerce">
+                        <label>Commerce</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/commerce.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="orbitalstation" data-group="station">
+                        <label>Orbital Station</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/orbital_station.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="battlestation" data-group="station">
+                        <label>Battlestation</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/battlestation.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="starfortress" data-group="station">
+                        <label>Star Fortress</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/battlestation.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="grounddefenses" data-group="ground">
+                        <label>Ground Defenses</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/ground_defenses.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="heavybatteries" data-group="ground">
+                        <label>Heavy Batteries</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/heavy_batteries.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="patrolhq" data-group="fleets">
+                        <label>Patrol HQ</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/patrol_hq.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="militarybase" data-group="fleets">
+                        <label>Military Base</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/military_base.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure industry" data-structure="highcommand" data-group="fleets">
+                        <label>High Command</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/high_command.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="planetaryshield">
+                        <label>Planetary Shield</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/planetary_shield.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                    <li class="structure" data-structure="cryorevival">
+                        <label>Cryorevival Facility</label>
+                        <div class="images">
+                            <img class="illustration" draggable="false" src="images/industries/cryorevival.png">
+                            <div class="additions"></div>
+                        </div>
+                    </li>
+                </ul>
+                <footer>
+                    <div>Industries: <span class="industry_count"></span>/<span class="max_industries"></span>. Structures: <span class="structure_count"></span>/12.</div>
+                    <div>
+                        <button class="cancel">Cancel</button>
+                        <button id="choose_structures_accept">Accept</button>
+                    </div>
+                </footer>
+            </div>
+            <div class="dialog" id="configure_structure_dialog">
+                <header>
+                    Configure <span class="name"></span>
+                </header>
+                <div>
+                    <h4>Improvements</h4>
+                    <label class="toggle_container story">
+                        <input type="checkbox" class="improvements">
+                        <div class="label" title="">Make Improvements</div>
+                    </label>
+                </div>
+                <div>
+                    <h4>AI Core</h4>
+                    <label class="toggle_container">
+                        <input type="radio" name="aicore" class="clearable_radio" data-aicore="1">
+                        <div class="label" title="-1 demand">Gamma</div>
+                    </label>
+                    <label class="toggle_container">
+                        <input type="radio" name="aicore" class="clearable_radio" data-aicore="2">
+                        <div class="label" title="-1 demand, -25% upkeep">Beta</div>
+                    </label>
+                    <label class="toggle_container">
+                        <input type="radio" name="aicore" class="clearable_radio" data-aicore="3">
+                        <div class="label" title="">Alpha</div>
+                    </label>
+                </div>
+                <div class="artifact population">
+                    <h4>Orbital Fusion Lamp</h4>
+                    <p>Counters the effects of Cold, Extreme Cold, Low Light, and Darkness. Increases heat on non-cold planets. Adds demand for 10 units of volatiles.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="orbital_fusion_lamp">
+                        <div class="label">Install</div>
+                    </label>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="orbital_fusion_lamp_optional">
+                        <div class="label">Install If Hazard Reduced</div>
+                    </label>
+                    <h4>Hypershunt Tap</h4>
+                    <p>Increases the maximum number of industries at a colony by 1 when demand for 10 units of transplutonics is fully met.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="coronal_portal">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact spaceport megaport">
+                    <h4>Fullerene Spool</h4>
+                    <p>+30% accessibility</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="fullerene_spool">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact farmingaquaculture">
+                    <h4>Soil Nanites</h4>
+                    <p>Requires: No transplutonic ore deposits, no volatiles deposits. Increases farming production by 2 units.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="soil_nanites">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact mining">
+                    <h4>Autonomous Mantle Bore</h4>
+                    <p>Requires: Not a gas giant, not habitable. Increases ore, transplutonic ore, and organics production by 3 units.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="mantle_bore">
+                        <div class="label">Install</div>
+                    </label>
+                    <h4>Plasma Dynamo</h4>
+                    <p>Requires: Gas giant. Increases volatiles production by 3 units.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="plasma_dynamo">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact refining">
+                    <h4>Catalytic Core</h4>
+                    <p>Requires: No atmosphere. Increases refining production by 3 units.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="catalytic_core">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact lightindustry">
+                    <h4>Biofactory Embryo</h4>
+                    <p>Requires: Habitable. Increases light industry production by 2 units.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="biofactory_embryo">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact heavyindustry orbitalworks">
+                    <h4>Corrupted Nanoforge</h4>
+                    <p>Increases ship and weapon production quality by 20%. Increases this industry’s production by 1 unit. On habitable worlds, causes pollution.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="corrupted_nanoforge">
+                        <div class="label">Install</div>
+                    </label>
+                    <h4>Pristine Nanoforge</h4>
+                    <p>Increases ship and weapon production quality by 50%. Increases this industry’s production by 3 units. On habitable worlds, causes pollution.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="pristine_nanoforge">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact fuelprod">
+                    <h4>Synchrotron Core</h4>
+                    <p>Requires: No atmosphere. Increases fuel production by 3 units.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="synchrotron">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact commerce">
+                    <h4>Dealmaker Holosuite</h4>
+                    <p>Colony’s income increased by 50%.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="dealmaker_holosuite">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact patrolhq militarybase highcommand">
+                    <h4>Cryoarithmetic Engine</h4>
+                    <p>Requires: Hot or extreme heat. Increases size of fleets launched by colony by 25% for hot worlds, and by 100% for worlds with extreme heat.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="cryoarithmetic_engine">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <div class="artifact grounddefenses heavybatteries">
+                    <h4>Combat Drone Replicator</h4>
+                    <p>Colony’s ground defenses increased by x1.5.</p>
+                    <label class="toggle_container">
+                        <input type="radio" name="artifact" class="clearable_radio" data-artifact="drone_replicator">
+                        <div class="label">Install</div>
+                    </label>
+                </div>
+                <!--
+                    Population & Infrastrucutre: Hypershunt Tap
+                    Population & Infrastrucutre: Orbital Fusion Lamp
+                        [None] [Hypershunt Tap] [Orbital Fusion Lamp if beneficial]
+                    Spaceport: Fullerene Spool
+                    Megaport: Fullerene Spool
+                    Farming: Soil Nanites [No] [Auto] [Yes]
+                        Or... Minimum Food Production: [10 v]
+                    Mining: Autonomous Mantle Bore
+                    Mining: Plasma Dynamo
+                        [Maximize profit without using artifacts] [Use Autonomous Mantle Bore] [Use Plasma Dynamo] [Maximize profit]
+                        Or... Minimum Ore Production: [8 v]
+                            Minimum Rare Ore Production: [8 v]
+                            Minimum Organics Production: [8 v]
+                            Minimum Volatiles Production: [8 v]
+                    Refining: Catalytic Core [No] [Auto] [Yes]
+                    Light Industry: Biofactory Embryo [No] [Auto] [Yes]
+                    Heavy Industry: Corrupted Nanoforge
+                    Heavy Industry: Pristine Nanoforge
+                    Orbital Works: Corrupted Nanoforge
+                    Orbital Works: Pristine Nanoforge
+                    Fuel Production: Synchrotron Core [No] [Auto] [Yes]
+                    Commerce: Dealmaker Holosuite
+                    Ground Defenses: Combat Drone Replicators
+                    Heavy Batteries: Combat Drone Replicators
+                    Patrol HQ: Cryoarithmetic Engine
+                    Military Base: Cryoarithmetic Engine
+                    High Command: Cryoarithmetic Engine
+                -->
+                <footer>
+                    <div>
+                        <button class="cancel">Cancel</button>
+                        <button id="configure_structure_accept">Accept</button>
+                    </div>
+                </footer>
+            </div>
+            <div class="dialog" id="planet_sets_dialog">
+                <header>
+                    Top Candidates
+                </header>
+                <div class="warning timed_out">Your search exceeded the 120-second time limit. Not all possibilities were considered. See help for more information.</div>
+                <div class="dialog_mid">
+                    <div class="table_constraint">
+                        <table class="planet_sets body">
+                            <thead>
+                                <tr>
+                                    <td class="system">System</td>
+                                    <td class="location">Location</td>
+                                    <td class="name">Planet</td>
+                                    <td class="type">Type</td>
+                                    <td class="stability">Stab</td>									
+                                    <td class="accessibility">Acc</td>
+                                    <td class="fleet_size">Fleet</td>
+                                    <td class="ship_quality">Qual</td>
+                                    <td class="ground_forces">Ground</td>
+                                    <td class="hazard_rating">Hazard</td>
+                                    <td class="production">Prod</td>
+                                    <td class="demand">Dmnd</td>
+                                    <td class="income">Income</td>
+                                    <td class="upkeep">Upkeep</td>
+                                    <td class="profit">Profit</td>
+									<td class="tm_mult">TM-Mult</td>
+									<td class="gate">Gate</td>
+									<td class="relay">Domain Relay</td>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <table class="template">
+                    <tr class="planet">
+                        <td class="system"></td>
+                        <td class="location numeric nowrap"></td>
+                        <td class="name"></td>
+                        <td class="type"></td>
+                        <td class="stability numeric"></td>
+                        <td class="accessibility numeric"></td>
+                        <td class="fleet_size numeric"></td>
+                        <td class="ship_quality numeric"></td>
+                        <td class="ground_forces numeric"></td>
+                        <td class="hazard_rating numeric"></td>
+                        <td class="production"></td>
+                        <td class="demand"></td>
+                        <td class="income numeric"></td>
+                        <td class="upkeep numeric"></td>
+                        <td class="profit numeric"></td>
+						<td class="tm_mult numeric"></td>
+						<td class="gate"></td>
+						<td class="relay"></td>
+                    </tr>
+                    <tr class="overall">
+                        <td colspan="10"></td>
+                        <td class="production"></td>
+                        <td class="demand"></td>
+                        <td class="income numeric"></td>
+                        <td class="upkeep numeric"></td>
+                        <td class="profit numeric"></td>
+						<td colspan="3"></td>
+                    </tr>
+                </table>
+                <footer>
+                    <div>
+                        <button class="cancel">Close</button>
+                    </div>
+                </footer>
+            </div>
+            <div class="dialog" id="save_load_criteria_dialog">
+                <header>
+                    <span class="action"></span> Colony Preset
+                </header>
+                <div>
+                    <div class="save_slots">
+                        <label>Choose a slot:</label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="0">
+                            <div class="label">0: Empty</div>
+                        </label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="1">
+                            <div class="label">1: Empty</div>
+                        </label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="2">
+                            <div class="label">2: Empty</div>
+                        </label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="3">
+                            <div class="label">3: Empty</div>
+                        </label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="4">
+                            <div class="label">3: Empty</div>
+                        </label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="5">
+                            <div class="label">3: Empty</div>
+                        </label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="6">
+                            <div class="label">3: Empty</div>
+                        </label>
+                        <label class="toggle_container">
+                            <input type="radio" name="slot" value="7">
+                            <div class="label">3: Empty</div>
+                        </label>
+                    </div>
+                    <div class="name_input">
+                        <label><div>Name:</div>
+                            <input name="preset_name" maxlength="64">
+                        </label>
+                    </div>
+                </div>
+                <footer>
+                    <div>
+                        <button class="save_preset">Save</button>
+                        <button class="cancel">Close</button>
+                    </div>
+                </footer>
+            </div>
+            <div id="tooltip"></div>
+        </div>
+        <svg class="filters">
+            <defs>
+            <filter id="additions-glow" color-interpolation-filters="sRGB">
+                <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+                                                                        0 1 0 0 0
+                                                                        0 0 1 0 0
+                                                                        0 0 0 3 0" result="opaquer" />
+                <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="dilated" />
+                <feColorMatrix in="dilated" type="matrix" values="1 0 0 0 0.639
+                                                                  0 1 0 0 0.871
+                                                                  0 0 1 0 1
+                                                                  0 0 0 2 0" result="matrixed" />
+                <feComposite in="opaquer" in2="matrixed" />
+            </filter>
+            </defs>
+        </svg>
+        <script src="ui.js"></script>
+        <script src="starsearch.js"></script>
+    </body>
+</html>
