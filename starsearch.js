@@ -1670,7 +1670,7 @@ function parse_xml(contents) { // {{{
         });
     });
     xml.querySelectorAll(':is(Sstm, [cl="Sstm"])[z]').forEach(function (system_node) {	
-        if(!(typeof get_coord(system_node) === 'undefined')){
+        if(!(typeof system_node === 'undefined') && !(typeof get_coord(system_node) === 'undefined')){
 			const name = system_node.getAttribute('bN');
 			const coord = get_coord(system_node).textContent.split('|');
 			const tags_element = get_named_child(system_node, 'tags');
@@ -1767,7 +1767,7 @@ function parse_xml(contents) { // {{{
                 return false;
             }
         }
-		if(!(typeof system.bodies === 'undefined')){
+		if(!(typeof system === 'undefined') && !(typeof system.bodies === 'undefined')){
 			for (const body of system.bodies) {
 				body.domain_relay = true;
 				body.domain_relay_discovered = discovered;
@@ -1780,7 +1780,7 @@ function parse_xml(contents) { // {{{
         const system_node = get_named_child(ccent, 'cL')
         const system_id = system_node.getAttribute('ref') || system_node.getAttribute('z');
         const system = systems[system_id];
-		if(!(typeof system.bodies === 'undefined')){
+		if(!(typeof system === 'undefined') && !(typeof system.bodies === 'undefined')){
 			for (const body of system.bodies) {
 				body.gate = true;
 				body.gate_discovered = discovered;
@@ -1814,7 +1814,7 @@ function consider_other_factors(systems) { // {{{
                 if (neighbor.distance > ten_ly) {
                     break;
                 }
-				if(!(typeof neighbor.system.bodies === 'undefined')){
+				if(!(typeof neighbor === 'undefined') && !(typeof neighbor.system === 'undefined') && !(typeof neighbor.system.bodies === 'undefined')){
 					for (const body of neighbor.system.bodies) {
 						if (body.coronal_tap === false || neighbor.distance < body.coronal_tap) {
 							body.coronal_tap = neighbor.distance;
@@ -1832,7 +1832,7 @@ function consider_other_factors(systems) { // {{{
                 if (neighbor.distance > ten_ly) {
                     break;
                 }
-				if(!(typeof neighbor.system.bodies === 'undefined')){
+				if(!(typeof neighbor === 'undefined') && !(typeof neighbor.system === 'undefined') && !(typeof neighbor.system.bodies === 'undefined')){
 					for (const body of neighbor.system.bodies) {
 						if (body.cryosleeper === false || neighbor.distance < body.cryosleeper) {
 							body.cryosleeper = neighbor.distance;
