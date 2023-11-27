@@ -1200,8 +1200,39 @@ class Body {
     } // }}}
 
     prefilter_structures(criteria, spoiler_level) { // {{{
+        let ruins_pass = true
+        if (criteria.requested_ruins_score != null) {
+            if (this.conditions.tech == null) ruins_pass = false
+            else ruins_pass = this.conditions.tech >= criteria.requested_ruins_score
+        }
+        let ore_pass = true
+        if (criteria.requested_ore_score != null) {
+            if (this.conditions.ore == null) ore_pass = false
+            else ore_pass = this.conditions.ore >= criteria.requested_ore_score
+        }
+        let rare_ore_pass = true
+        if (criteria.requested_rare_ore_score != null) {
+            if (this.conditions.rare_ore == null) rare_ore_pass = false
+            else rare_ore_pass = this.conditions.rare_ore >= criteria.requested_rare_ore_score
+        }
+        let volatiles_pass = true
+        if (criteria.requested_volatiles_score != null) {
+            if (this.conditions.volatiles == null) volatiles_pass = false
+            else volatiles_pass = this.conditions.volatiles >= criteria.requested_volatiles_score
+        }
+        let organics_pass = true
+        if (criteria.requested_organics_score != null) {
+            if (this.conditions.organics == null) organics_pass = false
+            else organics_pass = this.conditions.organics >= criteria.requested_organics_score
+        }
+        let farmland_pass = true
+        if (criteria.requested_farmland_score != null) {
+            if (this.conditions.tech == null) farmland_pass = false
+            else farmland_pass = this.conditions.food >= criteria.requested_farmland_score
+        }
+
         const needs = criteria.structures;
-        return !(needs.techmining && !this.conditions.techmining
+        return ruins_pass && ore_pass && rare_ore_pass && volatiles_pass && organics_pass && farmland_pass && !(needs.techmining && !this.conditions.techmining
             || needs.farmingaquaculture && !(this.conditions.farming || this.conditions.aquaculture)
             || needs.mining && !this.conditions.mining
             || needs.population?.coronal_portal
@@ -1228,32 +1259,6 @@ class Body {
             || criteria.market.gate
                 && (spoiler_level == 0 && !this.gate_discovered
                     || spoiler_level > 0 && !this.gate)
-			|| criteria.market.ruins_scattered && !this.keywords.includes('ruins_scattered')
-			|| criteria.market.ruins_widespread && !this.keywords.includes('ruins_widespread')
-			|| criteria.market.ruins_extensive && !this.keywords.includes('ruins_extensive')
-			|| criteria.market.ruins_vast && !this.keywords.includes('ruins_vast')
-			|| criteria.market.ore_sparse && !this.keywords.includes('ore_sparse')
-			|| criteria.market.ore_moderate && !this.keywords.includes('ore_moderate')
-			|| criteria.market.ore_abundant && !this.keywords.includes('ore_abundant')
-			|| criteria.market.ore_rich && !this.keywords.includes('ore_rich')
-			|| criteria.market.ore_ultrarich && !this.keywords.includes('ore_ultrarich')
-			|| criteria.market.rare_ore_sparse && !this.keywords.includes('rare_ore_sparse')
-			|| criteria.market.rare_ore_moderate && !this.keywords.includes('rare_ore_moderate')
-			|| criteria.market.rare_ore_abundant && !this.keywords.includes('rare_ore_abundant')
-			|| criteria.market.rare_ore_rich && !this.keywords.includes('rare_ore_rich')
-			|| criteria.market.rare_ore_ultrarich && !this.keywords.includes('rare_ore_ultrarich')
-			|| criteria.market.volatiles_trace && !this.keywords.includes('volatiles_trace')
-			|| criteria.market.volatiles_diffuse && !this.keywords.includes('volatiles_diffuse')
-			|| criteria.market.volatiles_abundant && !this.keywords.includes('volatiles_abundant')
-			|| criteria.market.volatiles_plentiful && !this.keywords.includes('volatiles_plentiful')
-			|| criteria.market.organics_trace && !this.keywords.includes('organics_trace')
-			|| criteria.market.organics_common && !this.keywords.includes('organics_common')
-			|| criteria.market.organics_abundant && !this.keywords.includes('organics_abundant')
-			|| criteria.market.organics_plentiful && !this.keywords.includes('organics_plentiful')
-			|| criteria.market.farmland_poor && !this.keywords.includes('farmland_poor')
-			|| criteria.market.farmland_adequate && !this.keywords.includes('farmland_adequate')
-			|| criteria.market.farmland_rich && !this.keywords.includes('farmland_rich')
-			|| criteria.market.farmland_bountiful && !this.keywords.includes('farmland_bountiful')
 			|| criteria.market.solar_array && !this.keywords.includes('solar_array')
 			|| criteria.market.habitable && !this.keywords.includes('habitable')
 			|| criteria.market.decivilized && !this.keywords.includes('decivilized')
@@ -1955,7 +1960,77 @@ function largest_shortage(shortages, commodities=[]) { // {{{
 } // }}}
 
 function get_colony_criteria(section) { // {{{
+    let requested_ore_score = undefined;
+    if (section.querySelector('input.ore_sparse').checked) {
+        requested_ore_score = -1
+    } else if (section.querySelector('input.ore_moderate').checked) {
+        requested_ore_score = 0
+    } else if (section.querySelector('input.ore_abundant').checked) {
+        requested_ore_score = 1
+    } else if (section.querySelector('input.ore_rich').checked) {
+        requested_ore_score = 2
+    } else if (section.querySelector('input.ore_ultrarich').checked) {
+        requested_ore_score = 3
+    }
+    let requested_rare_ore_score = undefined;
+    if (section.querySelector('input.rare_ore_sparse').checked) {
+        requested_rare_ore_score = -1
+    } else if (section.querySelector('input.rare_ore_moderate').checked) {
+        requested_rare_ore_score = 0
+    } else if (section.querySelector('input.rare_ore_abundant').checked) {
+        requested_rare_ore_score = 1
+    } else if (section.querySelector('input.rare_ore_rich').checked) {
+        requested_rare_ore_score = 2
+    } else if (section.querySelector('input.rare_ore_ultrarich').checked) {
+        requested_rare_ore_score = 3
+    }
+    let requested_volatiles_score = undefined;
+    if (section.querySelector('input.volatiles_trace').checked) {
+        requested_volatiles_score = -1
+    } else if (section.querySelector('input.volatiles_diffuse').checked) {
+        requested_volatiles_score = 0
+    } else if (section.querySelector('input.volatiles_abundant').checked) {
+        requested_volatiles_score = 1
+    } else if (section.querySelector('input.volatiles_plentiful').checked) {
+        requested_volatiles_score = 2
+    }
+    let requested_organics_score = undefined;
+    if (section.querySelector('input.organics_trace').checked) {
+        requested_organics_score = -1
+    } else if (section.querySelector('input.organics_common').checked) {
+        requested_organics_score = 0
+    } else if (section.querySelector('input.organics_abundant').checked) {
+        requested_organics_score = 1
+    } else if (section.querySelector('input.organics_plentiful').checked) {
+        requested_organics_score = 2
+    }
+    let requested_farmland_score = undefined;
+    if (section.querySelector('input.farmland_poor').checked) {
+        requested_farmland_score = -1
+    } else if (section.querySelector('input.farmland_adequate').checked) {
+        requested_farmland_score = 0
+    } else if (section.querySelector('input.farmland_rich').checked) {
+        requested_farmland_score = 1
+    } else if (section.querySelector('input.farmland_bountiful').checked) {
+        requested_farmland_score = 2
+    }
+    let requested_ruins_score = undefined;
+    if (section.querySelector('input.ruins_scattered').checked) {
+        requested_ruins_score = -1
+    } else if (section.querySelector('input.ruins_widespread').checked) {
+        requested_ruins_score = 0
+    } else if (section.querySelector('input.ruins_extensive').checked) {
+        requested_ruins_score = 1
+    } else if (section.querySelector('input.ruins_vast').checked) {
+        requested_ruins_score = 2
+    }
     const criteria = {
+        requested_ore_score,
+        requested_rare_ore_score,
+        requested_volatiles_score,
+        requested_organics_score,
+        requested_farmland_score,
+        requested_ruins_score,
         'market': {
             'player_governed': section.querySelector('input.player_governed').checked,
             'industrial_planning': section.querySelector('input.industrial_planning').checked,
