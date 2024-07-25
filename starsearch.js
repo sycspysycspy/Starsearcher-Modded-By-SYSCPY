@@ -1692,7 +1692,7 @@ function parse_xml(contents) { // {{{
 				system.coronal_tap = true;
 				system.coronal_tap_discovered = discovered;
 			}
-			if (tags.includes('theme_derelict_cryosleeper')) {
+			if (tags.includes('theme_derelict_cryosleeper')&& !(typeof system_node === 'undefined') && !(typeof system_node.querySelector('[cl="CryosleeperEntityPlugin"]') === 'undefined')&& system_node.querySelector('[cl="CryosleeperEntityPlugin"]') !== null) {			
 				const ccent = system_node.querySelector('[cl="CryosleeperEntityPlugin"]').parentElement;
 				const discovered = !(ccent.hasAttribute('di') && (ccent.getAttribute('di') === 'true'));
 				system.cryosleeper = true;
