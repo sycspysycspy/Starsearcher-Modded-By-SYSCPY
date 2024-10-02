@@ -1703,9 +1703,13 @@ function parse_xml(contents) { // {{{
 		}
     });
     body_coords = {};
-    xml.querySelectorAll('d[cl="Plnt"]').forEach(function (d_node) {
-        const body_id = d_node.getAttribute('ref');
-        const loc_node = get_named_child(d_node.parentElement.parentElement.parentElement, 'loc');
+    xml.querySelectorAll('iSE[cl="Plnt"]').forEach(function (iseNode) {
+        const body_id = iseNode.getAttribute('ref');
+        const jump_point = iseNode.parentElement.parentElement;
+        if (jump_point.tagName == 'NGW') {
+            return;
+        }
+        const loc_node = get_named_child(jump_point, 'loc');
         const coords = loc_node.textContent.split('|');
         body_coords[body_id] = { 'x': Number(coords[0]), 'y': Number(coords[1]) };
     });
