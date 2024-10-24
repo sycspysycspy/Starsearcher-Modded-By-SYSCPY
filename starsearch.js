@@ -1680,7 +1680,7 @@ function parse_xml(contents) { // {{{
 			const coord = get_coord(system_node).textContent.split('|');
 			const tags_element = get_named_child(system_node, 'tags');
 			const tags = [];
-			if(!(typeof tags_element.children === 'undefined')){
+			if(!!tags_element && !(typeof tags_element.children === 'undefined')){
 				for (const st of tags_element.children) {
 					tags.push(st.textContent);
 				}
